@@ -13,7 +13,7 @@ jobs:
       - name: Check NodeJS version
         run: node -v
       - name: Check NPM version
-        run: npm-v
+        run: npm -v
       - name: Install dependencies
         run: npm install
       - name: Run Playwright tests
