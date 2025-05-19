@@ -22,9 +22,9 @@ jobs:
         run: cp .env.example .env
       - name: Add required variable to .env file
         run: |
-          echo "${{ vars.BASE_URL }}" >> .env
-          echo "${{ vars.EMAIL_ADMIN }}" >> .env
-          echo "${{ vars.PASS_ADMIN }}" >> .env
+          echo "BASE_URL = ${{ vars.BASE_URL }}" >> .env
+          echo "EMAIL_ADMIN = ${{ vars.EMAIL_ADMIN }}" >> .env
+          echo "PASS_ADMIN = ${{ vars.PASS_ADMIN }}" >> .env
       - name: Check .env file
         run: cat .env
       - name: Run tests
