@@ -51,6 +51,7 @@ export class AddProdukPage extends ProdukPage {
 
     public async openKategoriPopup(): Promise<void> {
         await this.page.getByRole(this.kategoriField.role, { name: this.kategoriField.name }).click();
+        await this.page.waitForTimeout(3000);
     };
 
     public async pickRandomKategori(): Promise<void> {
