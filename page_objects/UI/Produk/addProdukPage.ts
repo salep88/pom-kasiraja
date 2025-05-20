@@ -1,9 +1,10 @@
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { ProdukPage } from './produkPage';
 import { LocatorRoleName } from '../../../src/interfaces/locatorInterface';
 import { ProdukData } from '../../../src/interfaces/produkInterface';
+import { faker } from '@faker-js/faker'
 
-export class AddProdukPage extends ProdukPage {
+export class AddProdukPage {
     readonly page: Page;
     readonly namaField: LocatorRoleName;
     readonly deskripsiField: LocatorRoleName;
@@ -14,9 +15,9 @@ export class AddProdukPage extends ProdukPage {
     readonly searchfieldKategory: LocatorRoleName;
     readonly kategoriList: LocatorRoleName;
     readonly simpanBttn: LocatorRoleName;
+    readonly formAlertMessage: LocatorRoleName;
 
     constructor(page: Page) {
-        super(page);
         this.page = page;
         this.namaField = { role: 'textbox', name: 'nama' };
         this.deskripsiField = { role: 'textbox', name: 'deskripsi' };
@@ -27,6 +28,7 @@ export class AddProdukPage extends ProdukPage {
         this.searchfieldKategory = { role: 'textbox', name: 'cari' };
         this.kategoriList = { role: 'gridcell'};
         this.simpanBttn = { role: 'button', name: 'simpan' };
+        this.formAlertMessage = { role: 'alert' };
     };
 
     public async fillNamaField(nama: string): Promise<void> {
@@ -60,8 +62,16 @@ export class AddProdukPage extends ProdukPage {
         if (count === 0) throw new Error('No kategori items found');
         const randomIndex = Math.floor(Math.random() * count);
         await kategoriItems.nth(randomIndex).click();
+    };
 
-    }
+    public async validPrice(): Promise<{ hargaBeli: number; hargaJual: string }> {
+        const hargaBeli = faker.number.int({ min: 1000, max: 10000 });
+        const hargaJual = faker.number.int( { min: hargaBeli + 500, max: hargaBeli + 50000}).toString();
+        return {
+            hargaBeli,
+            hargaJual
+        };
+    };
 
     public async clickSimpanBttn(): Promise<void> {
         await this.page.getByRole(this.simpanBttn.role, { name: this.simpanBttn.name }).click();
@@ -77,4 +87,9 @@ export class AddProdukPage extends ProdukPage {
         await this.pickRandomKategori();
         await this.clickSimpanBttn();
     };
+
+    public async assertAlertFormMessage(message: string): Promise<void> {
+        await expect(this.page.getByRole(this.formAlertMessage.role)).toBeVisible();
+        await expect(this.page.getByRole(this.formAlertMessage.role).filter({ hasText: message })).toBeVisible();
+    }
 };
