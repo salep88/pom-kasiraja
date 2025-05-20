@@ -1,5 +1,5 @@
 export interface LocatorRoleName {
-    role: 'link' | 'button' | 'textbox' | 'combobox' | 'spinbutton' | 'gridcell';
+    role: 'link' | 'button' | 'textbox' | 'combobox' | 'spinbutton' | 'gridcell' | 'menuitem' | 'alert';
     name?: string;
 }
 
