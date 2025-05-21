@@ -1,34 +1,24 @@
 import { Page, expect } from '@playwright/test';
-import { ProdukPage } from './produkPage';
-import { LocatorRoleName } from '../../../src/interfaces/locatorInterface';
-import { ProdukData } from '../../../src/interfaces/produkInterface';
+import { LocatorRoleName } from '../../../../src/interfaces/locatorInterface';
+import { ProdukData } from '../../../../src/interfaces/produkInterface';
+import { addProdukPage } from '../../locators/produkPageLocators';
 import { faker } from '@faker-js/faker'
 
 export class AddProdukPage {
     readonly page: Page;
-    readonly namaField: LocatorRoleName;
-    readonly deskripsiField: LocatorRoleName;
-    readonly hargaBeliField: LocatorRoleName;
-    readonly hargaJualField: LocatorRoleName;
-    readonly stokField: LocatorRoleName;
-    readonly kategoriField: LocatorRoleName;
-    readonly searchfieldKategory: LocatorRoleName;
-    readonly kategoriList: LocatorRoleName;
-    readonly simpanBttn: LocatorRoleName;
-    readonly formAlertMessage: LocatorRoleName;
+    readonly namaField = addProdukPage.namaField;
+    readonly deskripsiField = addProdukPage.deskripsiField;
+    readonly hargaBeliField = addProdukPage.hargaBeliField;
+    readonly hargaJualField = addProdukPage.hargaJualField;
+    readonly stokField = addProdukPage.stokField;
+    readonly kategoriField = addProdukPage.kategoriField;
+    readonly searchfieldKategory = addProdukPage.searchfieldKategory;
+    readonly kategoriList = addProdukPage.kategoriList;
+    readonly simpanBttn = addProdukPage.simpanBttn;
+    readonly formAlertMessage = addProdukPage.formAlertMessage;
 
     constructor(page: Page) {
         this.page = page;
-        this.namaField = { role: 'textbox', name: 'nama' };
-        this.deskripsiField = { role: 'textbox', name: 'deskripsi' };
-        this.hargaBeliField = { role: 'textbox', name: 'harga beli' };
-        this.hargaJualField = { role: 'textbox', name: 'harga jual' };
-        this.stokField = { role: 'textbox', name: 'stok' };
-        this.kategoriField = { role: 'textbox', name: 'kategori' };
-        this.searchfieldKategory = { role: 'textbox', name: 'cari' };
-        this.kategoriList = { role: 'gridcell'};
-        this.simpanBttn = { role: 'button', name: 'simpan' };
-        this.formAlertMessage = { role: 'alert' };
     };
 
     public async fillNamaField(nama: string): Promise<void> {

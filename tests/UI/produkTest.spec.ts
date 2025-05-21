@@ -1,7 +1,7 @@
-import { test, expect } from '@playwright/test';
-import { ProdukPage } from '../../page_objects/UI/Produk/produkPage';
-import { AddProdukPage } from '../../page_objects/UI/Produk/addProdukPage';
-import { UbahProdukPage } from '../../page_objects/UI/Produk/ubahProdukPage';
+import { test } from '@playwright/test';
+import { ProdukPage } from '../../page_objects/UI/features/produk/produkPage';
+import { AddProdukPage } from '../../page_objects/UI/features/produk/addProdukPage';
+import { UbahProdukPage } from '../../page_objects/UI/features/produk/ubahProdukPage';
 import { LoginPage } from '../../page_objects/UI/loginPage';
 import { faker } from '@faker-js/faker';
 import 'dotenv/config';

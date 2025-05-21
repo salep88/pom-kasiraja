@@ -19,6 +19,7 @@ export class authFlow {
         });
 
         if (!response.ok()) {
+            console.log(response);
             throw new Error(`Failed to generate access token: ${response.status()} ${response.statusText()}`);
         }
 

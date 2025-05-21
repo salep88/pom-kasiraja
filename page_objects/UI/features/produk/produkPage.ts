@@ -1,27 +1,20 @@
 import { Page, expect } from '@playwright/test';
-import { LocatorRoleName, LocatorLabelName } from '../../../src/interfaces/locatorInterface';
+// import { LocatorRoleName, LocatorLabelName } from '../../../../src/interfaces/locatorInterface';
+import { produkPage } from '../../locators/produkPageLocators';
 
 export class ProdukPage {
     protected page: Page;
-    protected produkMenu: LocatorRoleName;
-    protected tambahBttn: LocatorRoleName;
-    protected searchField: LocatorRoleName;
-    protected searchBttn: string;
-    protected categoryField: LocatorLabelName;
-    protected toastPopup : string;
-    protected produkMenuItem: string;
-    protected ubahEllipsisMenuItem: LocatorRoleName
+    protected produkMenu = produkPage.produkMenu;
+    protected tambahBttn = produkPage.tambahBttn;
+    protected searchField = produkPage.searchField;
+    protected searchBttn = produkPage.searchBttn;
+    protected categoryField = produkPage.categoryField;
+    protected toastPopup = produkPage.toastPopup;
+    protected produkMenuItem = produkPage.produkMenuItem;
+    protected ubahEllipsisMenuItem = produkPage.ubahEllipsisMenuItem;
     
     constructor(page: Page) {
         this.page = page;
-        this.produkMenu = { role: 'link', name: 'produk'};
-        this.tambahBttn = { role: 'link', name: 'tambah' };
-        this.searchField = { role: 'textbox', name: 'cari' };
-        this.searchBttn = '.chakra-input__right-element';
-        this.categoryField = { label: "", options: { exact: true } };
-        this.toastPopup = '#chakra-toast-manager-top-right';
-        this.produkMenuItem = '[aria-haspopup="menu"]';
-        this.ubahEllipsisMenuItem = { role: 'menuitem', name: 'ubah' };
     };
 
     protected async clickProdukMenu(): Promise<void> {
