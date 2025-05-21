@@ -1,7 +1,5 @@
-import { Page, expect } from '@playwright/test';
-import { LocatorRoleName } from '../../../src/interfaces/locatorInterface';
-import { ProdukData } from '../../../src/interfaces/produkInterface';
-import { faker } from '@faker-js/faker'
+import { Page } from '@playwright/test';
+import { ProdukData } from '../../../../src/interfaces/produkInterface';
 import { AddProdukPage } from './addProdukPage';
 
 export class UbahProdukPage extends AddProdukPage {
