@@ -20,9 +20,6 @@ jobs:
       - name: Build Docker image
         run: docker build -t pom-kasiraja .
 
-      - name: Debug node_modules
-        run: ls -la node_modules/@playwright/test
-
       - name: Run Playwright tests in Docker
         run: docker run --rm -v ${{ github.workspace }}:/app -w /app pom-kasiraja ls -la node_modules
 
