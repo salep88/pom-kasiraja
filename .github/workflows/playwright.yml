@@ -23,6 +23,9 @@ jobs:
       - name: Run Playwright tests in Docker
         run: docker run --rm -v ${{ github.workspace }}:/app -w /app pom-kasiraja npx playwright test --reporter=html
 
+      - name: Debug node_modules
+        run: ls -la node_modules/@playwright/test
+
       - name: Upload Playwright Report
         if: always()
         uses: actions/upload-artifact@v4
