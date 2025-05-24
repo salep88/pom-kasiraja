@@ -21,7 +21,10 @@ jobs:
         run: docker build -t pom-kasiraja .
 
       - name: Run Playwright tests in Docker
-        run: docker run --rm pom-kasiraja npx playwright test --reporter=html
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}/playwright-report:/app/playwright-report \
+            pom-kasiraja npx playwright test --reporter=html
 
       - name: Upload Playwright Report
         if: always()
