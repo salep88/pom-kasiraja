@@ -18,7 +18,7 @@ jobs:
           echo "PASS_ADMIN = ${{ vars.PASS_ADMIN }}" >> .env
 
       - name: Build Docker image
-        run: docker-build -t pom-kasiraja .
+        run: docker build -t pom-kasiraja .
 
       - name: Run Playwright tests in Docker
         run: docker run --rm -v ${{ github.workspace }}:/app -w /app pom-kasiraja npx playwright test --reporter=html
