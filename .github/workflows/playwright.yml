@@ -6,30 +6,30 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - name: Check NodeJS version
-        run: node -v
-      - name: Check NPM version
-        run: npm -v
-      - name: Install dependencies
-        run: npm install && npm ci
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps
+
       - name: Copy .env file
         run: cp .env.example .env
+
       - name: Add required variable to .env file
         run: |
           echo "BASE_URL = ${{ vars.BASE_URL }}" >> .env
           echo "API_BASE_URL = ${{ vars.API_BASE_URL }}" >> .env
           echo "EMAIL_ADMIN = ${{ vars.EMAIL_ADMIN }}" >> .env
           echo "PASS_ADMIN = ${{ vars.PASS_ADMIN }}" >> .env
-      - name: Check .env file
-        run: cat .env
-      - name: Run tests
-        run: npx playwright test
+
+      - name: Build Docker image
+        run: docker-build -t pom-kasiraja .
+
+      - name: Run Playwright tests in Docker
+        run: docker run --rm -v ${{ github.workspace }}:/app -w /app pom-kasiraja npx playwright test --reporter=html
+
+      - name: Upload Playwright Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report
+
   deploy:
     runs-on: ubuntu-latest
     needs: [test]

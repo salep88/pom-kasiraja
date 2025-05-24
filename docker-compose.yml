@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  pom-kasiraja:
+    build: .
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: ["npx", "playwright", "test"]
+    # Uncomment below if you want to run a web server instead
+    # command: ["npm", "start"]
